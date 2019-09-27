@@ -13,10 +13,13 @@
     <![endif]-->
 
     <link rel="shortcut icon" href="favicon.ico">
-    <link href="css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="css/style.min.css" rel="stylesheet">
+    <script>
+
+    </script>
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -61,21 +64,34 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="index_v1.html" data-index="0">增加卡牌</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=all" onclick="sendAjax()" >所有卡牌</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="index_v2.html">删除卡牌</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=select" onclick="sendAjax()">查找卡牌</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="index_v3.html">修改卡牌</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toInsert" onclick="sendAjax()">增加卡牌</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="index_v4.html">查找卡片</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toDel"  >删除卡片</a>
                         </li>
                         <li>
-                            <a href="index_v5.html" target="_blank">抽卡</a>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toModify" onclick="sendAjax()">修改卡片</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=extract">抽取卡牌</a>
                         </li>
                     </ul>
+
+
+
+
+
+
+
+
+
+
 
                 </li>
                 <li>
@@ -460,7 +476,7 @@
                         </ul>
                     </li>
                     <li class="hidden-xs">
-                        <a href="index_v1.html" class="J_menuItem" data-index="0"><i class="fa fa-cart-arrow-down"></i> 购买</a>
+                        <a href="index_v1?v=4.0.jsp" class="J_menuItem" data-index="0"><i class="fa fa-cart-arrow-down"></i> 购买</a>
                     </li>
                     <li class="dropdown hidden-xs">
                         <a class="right-sidebar-toggle" aria-expanded="false">
@@ -475,7 +491,7 @@
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    <a href="" class="active J_menuTab" data-id="">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -497,7 +513,7 @@
             <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1.html?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v1?v=4.0.jsp?v=4.0" frameborder="0" data-id="index_v1.html" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
@@ -914,12 +930,12 @@
         </a>
     </div>
 </div>
-<script src="js/jquery.min.js?v=2.1.4"></script>
-<script src="js/bootstrap.min.js?v=3.3.5"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="js/plugins/layer/layer.min.js"></script>
-<script src="js/hplus.min.js?v=4.0.0"></script>
+<script src="js/hplus.min.js"></script>
 <script type="text/javascript" src="js/contabs.min.js"></script>
 <script src="js/plugins/pace/pace.min.js"></script>
 </body>

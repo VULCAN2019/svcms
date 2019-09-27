@@ -21,6 +21,7 @@ public abstract class BaseServlet extends HttpServlet {
     private static final String METHOD_KEY = "method";
     private static final String METHOD_PREFIX = "do";
     private static final String PATH_PREFIX = "redirect:";
+    private static final String METHOD_END = "?v=4.0";
 
     /**
      * 视图的前缀
@@ -36,10 +37,15 @@ public abstract class BaseServlet extends HttpServlet {
         System.out.println("执行具体的操作");
         // 1.获取请求的参数
         String method = req.getParameter(METHOD_KEY);
+        // 1.1判断结尾是否有奇怪的字符串，有就截掉
+        String path2 = method;
+        if (method.contains(METHOD_END)) {
+            path2 = method.substring(0, method.indexOf("?"));
+        }
         // 2.判断方法是否在
         if (StringUtils.isNotEmpty(method)) {
             // 3.使用工具类把add转换成doAdd
-            String doMethod = StringUtils.appendDoMethod(METHOD_PREFIX, method);
+            String doMethod = StringUtils.appendDoMethod(METHOD_PREFIX, path2);
             // 4.获取当前类的类类型
             Class<?> aClass = this.getClass();
             try {
@@ -51,16 +57,18 @@ public abstract class BaseServlet extends HttpServlet {
                 if (result instanceof String) {
                     String path = (String) result;
                     if (StringUtils.isNotEmpty(path)) {
+
                         // 判断路径是否以 redirect:开头,如果是,则调用重定向方法
-                        if (path.startsWith(PATH_PREFIX)) {
+                        if (path2.startsWith(PATH_PREFIX)) {
                             // 截取
-                            String substring = path.substring(PATH_PREFIX.length());
+                            String substring = path2.substring(PATH_PREFIX.length());
                             // 重定向
                             resp.sendRedirect(req.getContextPath() + substring);
                         } else {
                             // 请求转发  /book/list  --> /WEB-INF/view/book/list.jsp
                             req.getRequestDispatcher(VIEW_PREFIX + path + VIEW_SUFFIX).forward(req, resp);
                         }
+
                     }
                 }
             } catch (NoSuchMethodException e) {

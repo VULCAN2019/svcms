@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
             request.getSession().setAttribute("username", username);
         }
         // 成功后跳转到另外一个页面
-        response.sendRedirect(request.getContextPath()+"/cards?method=list");
+        response.sendRedirect(request.getContextPath()+"/cards?method=toAll");
 
     }
 

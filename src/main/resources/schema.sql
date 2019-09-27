@@ -9,7 +9,7 @@ create table svcms.card(
     id int primary key not null auto_increment COMMENT '卡牌id',
     card_name varchar(20) not null COMMENT '卡牌名字',
     card_cost int not null COMMENT '卡牌费用',
-    card_level int not null comment '卡牌等级',
+    card_level varchar(20) not null comment '卡牌等级',
     card_type varchar(20) not null comment '卡牌类型',
     card_faction varchar(20) not null comment '卡牌阵营',
     card_atk int not null comment '卡牌攻击力',
@@ -17,6 +17,11 @@ create table svcms.card(
     card_power varchar(100) not null comment '卡牌特性',
     card_intro varchar(250) not null comment '卡牌简介'
 ) engine=InnoDB comment '卡牌信息表';
+
+-- 插入一条数据
+insert into card values(null,'永劫欲求者‧关德温',6,'传说','随从','死灵法师',4,5,'
+	进化前 永恒的秘药‧剎那的剧毒入场曲 增加1张命运抉择 所指定的卡片到手牌中。 攻击时 回复自己的PP 1点。进化后 攻击时 回复自己的PP 1点。','
+	进化前 日积月累的每个剎那，最终将能成为永恒。进化后 与其一辈子愚蠢地过活，还不如成为我的道具，岂不是更有用?');
 
 -- 创建用户表
 create table svcms.user(

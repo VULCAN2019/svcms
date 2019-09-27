@@ -2,6 +2,7 @@ package com.rimi.cms.util;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.rimi.cms.exception.RecordNotUniqueException;
+import com.rimi.cms.exception.RecordNotUniqueException;
 
 import javax.sql.DataSource;
 import java.beans.PropertyDescriptor;
@@ -9,7 +10,6 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -218,10 +218,6 @@ public class JDBCUtils {
                         Method writeMethod = pd.getWriteMethod();
                         // 获取该列多对应的值
                         Object value = rs.getObject(columnName);
-                        // 判断类型是否是date类型，是就格式化一下
-                        if (value instanceof Date) {
-                            value = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(value);
-                        }
                         // 调用写入属性的方法,把属性设置到该对象中
                         writeMethod.invoke(obj, value);
                     } catch (Exception e) {
