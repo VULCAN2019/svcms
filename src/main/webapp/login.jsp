@@ -51,6 +51,7 @@
                         <input type="password" class="form-control" id="password" name="password" value="${requestScope.password}" placeholder="请输入密码"/>
                     </div>
                 </div>
+                <span style="margin-left:200px;">${success}</span>
                 <div class="form-group">
                     <div class="col-md-offset-4 col-md-6">
                         <p class="text-danger">${error}</p>
@@ -79,7 +80,7 @@
                         <input type="submit" class="btn btn-primary col-md-8" value="登陆"/>
                     </div>
                 </div>
-                <p style="position: relative;left:40%;">没有账号？<a href="#">点击注册</a></p>
+                <p style="position: relative;left:40%;">没有账号？<a href="register.jsp" target="_self">点击注册</a></p>
             </form>
         </div>
     </div>

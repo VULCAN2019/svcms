@@ -30,4 +30,9 @@ public interface ICardsDao {
     Card selectForOne(String id );
 
     void insert(Map<String, String[]> params);
+
+    void update(Map<String, String[]> modifyInfo);
+
+    List<Card> mySelectByPage(int currentSize, Integer pageSize, Map<String, String[]> parms);
+
 }

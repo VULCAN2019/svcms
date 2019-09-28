@@ -30,4 +30,8 @@ public interface ICardService {
     void save(Map<String, String[]> params);
 
     void deleteByIds(String[] ids);
+
+    void update(Map<String, String[]> modifyInfo);
+
+    Page<Card> myFindPageCard(Page page, Map<String, String[]> parms);
 }

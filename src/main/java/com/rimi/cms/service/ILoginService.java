@@ -1,5 +1,7 @@
 package com.rimi.cms.service;
 
+import com.rimi.cms.entity.User;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -14,4 +16,20 @@ public interface ILoginService {
      * @return 返回结果
      */
     boolean login(String username, String password, HttpServletRequest request);
+
+    /**
+     * 检查注册时是否已存在用户
+     * @param user
+     * @return
+     */
+    boolean checkUsername(User user);
+
+    /**
+     * 更新密码
+     * @param user
+     * @return
+     */
+    boolean updatePwd(User user);
+
+    boolean register(String username, String password);
 }

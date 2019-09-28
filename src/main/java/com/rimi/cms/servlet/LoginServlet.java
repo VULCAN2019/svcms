@@ -68,6 +68,8 @@ public class LoginServlet extends HttpServlet {
         // 判断用户 是否勾选七天免登录
         if (quicklogin != null) {
             request.getSession().setAttribute("username", username);
+            request.getSession().setAttribute("password",password);
+            request.getSession().setMaxInactiveInterval(7*24*60*60);
         }
         // 成功后跳转到另外一个页面
         response.sendRedirect(request.getContextPath()+"/cards?method=toAll");
@@ -81,7 +83,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         // 判断session中是否有用户
         if (session != null && session.getAttribute("username") != null) {
-            response.sendRedirect(request.getContextPath()+"cards?method=list");
+            response.sendRedirect(request.getContextPath()+"cards?method=toAll");
         } else {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }

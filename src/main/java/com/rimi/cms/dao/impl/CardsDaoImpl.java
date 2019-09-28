@@ -18,6 +18,7 @@ public class CardsDaoImpl implements ICardsDao {
 
     /**
      * 查找所有卡片
+     *
      * @return 返回找到卡片的集合
      */
     @Override
@@ -38,6 +39,7 @@ public class CardsDaoImpl implements ICardsDao {
 
     /**
      * 模糊查询
+     *
      * @param parms
      * @return
      */
@@ -48,37 +50,38 @@ public class CardsDaoImpl implements ICardsDao {
         List<String> parmsSql = new ArrayList<>();
         if (parms.get("cardName") != null && StringUtils.isNotEmpty(parms.get("cardName")[0])) {
             sql.append(" and card_name like ?");
-            parmsSql.add("%"+parms.get("cardName")[0]+"%");
+            parmsSql.add("%" + parms.get("cardName")[0] + "%");
         }
         if (parms.get("cardType") != null && StringUtils.isNotEmpty(parms.get("cardType")[0])) {
             sql.append(" and card_Type like ?");
-            parmsSql.add("%"+parms.get("cardType")[0]+"%");
+            parmsSql.add("%" + parms.get("cardType")[0] + "%");
         }
         if (parms.get("cardFaction") != null && StringUtils.isNotEmpty(parms.get("cardFaction")[0])) {
             sql.append(" and card_Faction like ?");
-            parmsSql.add("%"+parms.get("cardFaction")[0]+"%");
+            parmsSql.add("%" + parms.get("cardFaction")[0] + "%");
         }
         if (parms.get("cardCost") != null && StringUtils.isNotEmpty(parms.get("cardCost")[0])) {
             sql.append(" and card_Cost like ?");
-            parmsSql.add("%"+parms.get("cardCost")[0]+"%");
+            parmsSql.add("%" + parms.get("cardCost")[0] + "%");
         }
         if (parms.get("cardLevel") != null && StringUtils.isNotEmpty(parms.get("cardLevel")[0])) {
             sql.append(" and card_Level like ?");
-            parmsSql.add("%"+parms.get("cardLevel")[0]+"%");
+            parmsSql.add("%" + parms.get("cardLevel")[0] + "%");
         }
         if (parms.get("cardAtk") != null && StringUtils.isNotEmpty(parms.get("cardAtk")[0])) {
             sql.append(" and card_Atk like ?");
-            parmsSql.add("%"+parms.get("cardAtk")[0]+"%");
+            parmsSql.add("%" + parms.get("cardAtk")[0] + "%");
         }
         if (parms.get("cardHp") != null && StringUtils.isNotEmpty(parms.get("cardHp")[0])) {
             sql.append(" and card_Hp like ?");
-            parmsSql.add("%"+parms.get("cardHp")[0]+"%");
+            parmsSql.add("%" + parms.get("cardHp")[0] + "%");
         }
         return JDBCUtils.executeQueryForCount(sql.toString(), parmsSql);
     }
 
     /**
      * 查询所需查询业数的数据
+     *
      * @param parms
      * @return
      */
@@ -89,44 +92,45 @@ public class CardsDaoImpl implements ICardsDao {
         List<Object> parmsSql = new ArrayList<>();
         if (parms.get("cardName") != null && StringUtils.isNotEmpty(parms.get("cardName")[0])) {
             sql.append(" and card_name like ?");
-            parmsSql.add("%"+parms.get("cardName")[0]+"%");
+            parmsSql.add("%" + parms.get("cardName")[0] + "%");
         }
         if (parms.get("cardType") != null && StringUtils.isNotEmpty(parms.get("cardType")[0])) {
             sql.append(" and card_Type like ?");
-            parmsSql.add("%"+parms.get("cardType")[0]+"%");
+            parmsSql.add("%" + parms.get("cardType")[0] + "%");
         }
         if (parms.get("cardFaction") != null && StringUtils.isNotEmpty(parms.get("cardFaction")[0])) {
             sql.append(" and card_Faction like ?");
-            parmsSql.add("%"+parms.get("cardFaction")[0]+"%");
+            parmsSql.add("%" + parms.get("cardFaction")[0] + "%");
         }
         if (parms.get("cardCost") != null && StringUtils.isNotEmpty(parms.get("cardCost")[0])) {
             sql.append(" and card_Cost like ?");
-            parmsSql.add("%"+parms.get("cardCost")[0]+"%");
+            parmsSql.add("%" + parms.get("cardCost")[0] + "%");
         }
         if (parms.get("cardLevel") != null && StringUtils.isNotEmpty(parms.get("cardLevel")[0])) {
             sql.append(" and card_Level like ?");
-            parmsSql.add("%"+parms.get("cardLevel")[0]+"%");
+            parmsSql.add("%" + parms.get("cardLevel")[0] + "%");
         }
         if (parms.get("cardAtk") != null && StringUtils.isNotEmpty(parms.get("cardAtk")[0])) {
             sql.append(" and card_Atk like ?");
-            parmsSql.add("%"+parms.get("cardAtk")[0]+"%");
+            parmsSql.add("%" + parms.get("cardAtk")[0] + "%");
         }
         if (parms.get("cardHp") != null && StringUtils.isNotEmpty(parms.get("cardHp")[0])) {
             sql.append(" and card_Hp like ?");
-            parmsSql.add("%"+parms.get("cardHp")[0]+"%");
+            parmsSql.add("%" + parms.get("cardHp")[0] + "%");
         }
         return JDBCUtils.executeQuery(Card.class, sql.toString(), parmsSql);
     }
 
     /**
      * 根据id删除数据
+     *
      * @param id
      */
     @Override
     public void deleteById(Integer id) {
         // 定义sql
         String sql = "delete from card where card_id = ?";
-        JDBCUtils.executeUpdate(sql,id);
+        JDBCUtils.executeUpdate(sql, id);
     }
 
     @Override
@@ -134,7 +138,7 @@ public class CardsDaoImpl implements ICardsDao {
         // 定义sql
         String sql = "select count(1) from card";
         // 执行sql
-        return JDBCUtils.executeQueryForOne(Card.class,sql,id);
+        return JDBCUtils.executeQueryForOne(Card.class, sql, id);
     }
 
     @Override
@@ -151,7 +155,8 @@ public class CardsDaoImpl implements ICardsDao {
     @Override
     public void insert(Map<String, String[]> params) {
         // 1.定义sql
-        String sql = "insert into card(card_id,card_name,card_cost,card_level,card_type,card_faction,card_atk,card_hp,card_power,card_intro) values(null,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into card(card_id,card_name,card_cost,card_level,card_type,card_faction,card_atk," +
+                "card_hp,card_power,card_intro) values(null,?,?,?,?,?,?,?,?,?)";
         // 执行插入
         JDBCUtils.executeUpdate(sql,
                 params.get("cardName")[0],
@@ -163,6 +168,83 @@ public class CardsDaoImpl implements ICardsDao {
                 params.get("cardHp")[0],
                 params.get("cardPower")[0],
                 params.get("cardIntro")[0]);
+    }
+
+    @Override
+    public void update(Map<String, String[]> modifyInfo) {
+        // 定义sql
+        String sql = "update card set card_name = ?,card_cost = ?,card_level = ?,card_type = ?,card_faction = ?,card_atk = ?,card_hp = ?,card_power = ?,card_intro = ? where card_id = ?";
+        // 执行sql
+        JDBCUtils.executeUpdate(sql,
+                modifyInfo.get("cardName")[0],
+                modifyInfo.get("cardCost")[0],
+                modifyInfo.get("cardLevel")[0],
+                modifyInfo.get("cardType")[0],
+                modifyInfo.get("cardFaction")[0],
+                modifyInfo.get("cardAtk")[0],
+                modifyInfo.get("cardHp")[0],
+                modifyInfo.get("cardPower")[0],
+                modifyInfo.get("cardIntro")[0],
+                modifyInfo.get("cardId")[0]
+        );
+    }
+
+    /**
+     *
+     * @param currentSize   当前的页码
+     * @param pageSize  页面显示的条数
+     * @param parms 查询条件
+     * @return
+     */
+    @Override
+    public List<Card> mySelectByPage(int currentSize, Integer pageSize, Map<String, String[]> parms) {
+
+        // 根据条件拼接sql
+        StringBuffer sql = new StringBuffer("select * from card where 1 = 1");
+        List<Object> parmsSql = new ArrayList<>();
+        if (parms.get("cardName") != null && StringUtils.isNotEmpty(parms.get("cardName")[0])) {
+            sql.append(" and card_name like ?");
+            parmsSql.add("%" + parms.get("cardName")[0] + "%");
+        }
+        if (parms.get("cardType") != null && StringUtils.isNotEmpty(parms.get("cardType")[0])) {
+            sql.append(" and card_Type like ?");
+            parmsSql.add("%" + parms.get("cardType")[0] + "%");
+        }
+        if (parms.get("cardFaction") != null && StringUtils.isNotEmpty(parms.get("cardFaction")[0])) {
+            sql.append(" and card_Faction like ?");
+            parmsSql.add("%" + parms.get("cardFaction")[0] + "%");
+        }
+        if (parms.get("cardCost") != null && StringUtils.isNotEmpty(parms.get("cardCost")[0])) {
+            sql.append(" and card_Cost like ?");
+            parmsSql.add("%" + parms.get("cardCost")[0] + "%");
+        }
+        if (parms.get("cardLevel") != null && StringUtils.isNotEmpty(parms.get("cardLevel")[0])) {
+            sql.append(" and card_Level like ?");
+            parmsSql.add("%" + parms.get("cardLevel")[0] + "%");
+        }
+        if (parms.get("cardAtk") != null && StringUtils.isNotEmpty(parms.get("cardAtk")[0])) {
+            sql.append(" and card_Atk like ?");
+            parmsSql.add("%" + parms.get("cardAtk")[0] + "%");
+        }
+        if (parms.get("cardHp") != null && StringUtils.isNotEmpty(parms.get("cardHp")[0])) {
+            sql.append(" and card_Hp like ?");
+            parmsSql.add("%" + parms.get("cardHp")[0] + "%");
+        }
+
+        // 追加分页
+        sql.append(" limit ?,?");
+        // 添加一个当前的页码
+        parmsSql.add(currentSize);
+        // 添加一个页面总页数
+        parmsSql.add(pageSize);
+        // 执行结果，返回一个通过条件查询后得到的卡牌集合
+        /**
+         * Card.class 是将要查询的对象的类型
+         * sql.toString() 是sql语句，这里加toString()的原因是当前sql是StringBuffer可动态拼接字符串
+         * parmsSql为sql语句里面?的填充物
+         */
+        return JDBCUtils.executeQuery(Card.class,sql.toString(), parmsSql);
+
     }
 
 

@@ -8,4 +8,10 @@ import com.rimi.cms.entity.User;
  */
 public interface IUserDao {
     User login(String username, String password);
+
+    int checkUsername(User user);
+
+    Integer updatePwd(User user);
+
+    Integer insert(String username, String password);
 }

@@ -41,6 +41,9 @@ public class CardServiceImpl implements ICardService {
 
 
 
+
+
+
     /**
      * 根据id获取到所选数据，并删除
      * @param id
@@ -85,5 +88,29 @@ public class CardServiceImpl implements ICardService {
         for (String id : ids) {
             deleteById(Integer.valueOf(id));
         }
+    }
+
+    @Override
+    public void update(Map<String, String[]> modifyInfo) {
+        cardsDao.update(modifyInfo);
+    }
+
+    @Override
+    public Page<Card> myFindPageCard(Page page, Map<String, String[]> parms) {
+        // 根据条件查询所有的卡牌，没有条件的话就能查到所有的卡牌
+        Integer count = cardsDao.count(parms);
+        // 设置总页数
+        page.setTotalCount(count);
+
+        // 调用方法 传入当前页面的页码数，页面的总页数，查询条件；
+        // 然后根据方法里面根据条件，总页数，页码数，
+        // 返回一个分页后找到的所有卡牌组成的list集合
+        List<Card> cards = cardsDao.mySelectByPage(page.getCurrentSize(),
+                page.getPageSize(),parms);
+
+        // 传入一个分页后查询到的卡牌集合
+        page.setPageData(cards);
+
+        return page;
     }
 }

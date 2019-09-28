@@ -20,7 +20,7 @@ public class Page<T> {
     /**
      * 每页显示条数
      */
-    private Integer pageSize = 5;
+    private Integer pageSize = 8;
     /**
      * 总条数
      */
