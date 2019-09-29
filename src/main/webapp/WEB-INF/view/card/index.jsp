@@ -40,7 +40,7 @@
                                 </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li><a class="J_menuItem" href="form_avatar.html">修改头像</a>
+                            <li><a type="file" class="J_menuItem" href="#">修改头像</a><input type="file" >
                             </li>
                             <li><a class="J_menuItem" href="profile.html">个人资料</a>
                             </li>
@@ -79,7 +79,8 @@
                             <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toDel">删除卡片</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toModify">修改卡片</a>
+                            <a class="J_menuItem"
+                               href="${pageContext.request.contextPath}/cards?method=toModify">修改卡片</a>
                         </li>
                         <li>
                             <a class="J_menuItem"
@@ -516,14 +517,15 @@
                     </li>
                 </ul>
             </div>
-            <a href="${pageContext.request.contextPath}/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            <a href="${pageContext.request.contextPath}/logout" class="roll-nav roll-right J_tabExit"><i
+                    class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="../../../welcome.html"
-                    frameborder="0" data-id="../../../welcome.html" seamless></iframe>
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/login?method=welcome"
+                    frameborder="0" data-id="/login?method=welcome" seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
+            <div class="pull-right">&copy; 2019-2019 <a href="http://www.zi-han.net/" target="_blank">嘿一咻嘿一咻</a>
             </div>
         </div>
     </div>
@@ -601,19 +603,19 @@
                             </div>
                         </div>
                         <div class="title">皮肤选择</div>
-                        <div class="setings-item default-skin nb">
-                                <span class="skin-name ">
-                         <a href="#" class="s-skin-0">
-                             默认皮肤
-                         </a>
-                    </span>
+                        <div class="setings-item  blue-skin nb">
+                            <span class="skin-name ">
+                                <a href="#" class="s-skin-1">
+                                    蓝色主题
+                                </a>
+                            </span>
                         </div>
-                        <div class="setings-item blue-skin nb">
-                                <span class="skin-name ">
-                        <a href="#" class="s-skin-1">
-                            蓝色主题
-                        </a>
-                    </span>
+                        <div class="setings-item default-skin nb">
+                            <span class="skin-name ">
+                                 <a href="#" class="s-skin-0">
+                                     默认皮肤
+                                 </a>
+                            </span>
                         </div>
                         <div class="setings-item yellow-skin nb">
                                 <span class="skin-name ">

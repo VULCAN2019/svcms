@@ -5,29 +5,52 @@ create database svcms default character set utf8 collate utf8_unicode_ci;
 -- 如果比哦存在，则删除表
 drop table if exists svcms.card;
 -- 创建卡牌表
-create table svcms.card(
-    id int primary key not null auto_increment COMMENT '卡牌id',
-    card_name varchar(20) not null COMMENT '卡牌名字',
-    card_cost int not null COMMENT '卡牌费用',
-    card_level varchar(20) not null comment '卡牌等级',
-    card_type varchar(20) not null comment '卡牌类型',
-    card_faction varchar(20) not null comment '卡牌阵营',
-    card_atk int not null comment '卡牌攻击力',
-    card_hp int not null comment '卡牌生命值',
-    card_power varchar(100) not null comment '卡牌特性',
-    card_intro varchar(250) not null comment '卡牌简介'
-) engine=InnoDB comment '卡牌信息表';
+create table svcms.card
+(
+    card_id           int primary key not null auto_increment COMMENT '卡牌id',
+    card_name    varchar(20)     not null COMMENT '卡牌名字',
+    card_cost    int             not null COMMENT '卡牌费用',
+    card_level   varchar(20)     not null comment '卡牌等级',
+    card_type    varchar(20)     not null comment '卡牌类型',
+    card_faction varchar(20)     not null comment '卡牌阵营',
+    card_atk     int             not null comment '卡牌攻击力',
+    card_hp      int             not null comment '卡牌生命值',
+    card_power   varchar(250)    not null comment '卡牌特性',
+    card_intro   varchar(250)    not null comment '卡牌简介'
+) engine = InnoDB comment '卡牌信息表';
 
--- 插入一条数据
-insert into card values(null,'永劫欲求者‧关德温',6,'传说','随从','死灵法师',4,5,'
-	进化前 永恒的秘药‧剎那的剧毒入场曲 增加1张命运抉择 所指定的卡片到手牌中。 攻击时 回复自己的PP 1点。进化后 攻击时 回复自己的PP 1点。','
-	进化前 日积月累的每个剎那，最终将能成为永恒。进化后 与其一辈子愚蠢地过活，还不如成为我的道具，岂不是更有用?');
+-- 插入多条数据
+insert into card values (null, '永劫欲求者‧关德温', 6, '传说', '随从', '死灵法师', 4, 5, '进化前,永恒的秘药‧剎那的剧毒入场曲 增加1张命运抉择 所指定的卡片到手牌中。攻击时:回复自己的PP 1点。进化后,攻击时,回复自己的PP1点。', '进化前,日积月累的每个剎那，最终将能成为永恒。进化后,与其一辈子愚蠢地过活，还不如成为我的道具，岂不是更有用?');
+insert into card values (null,'马尔杜克',7,'传说','随从','中立',7,7,'入场曲:予自己的主战者「无法使用自己手牌中的从者卡」、「每当自己使用法术卡时，抽取1张卡片」及「每当自己使用护符时，给予敌方的主战者2点伤害」效果。这些能力在这个从者离场时失效。','该称之为神，或称之为魔?不，千言万语也寻不出一物以喻之。其存在正是起源，亦是终结，世界因其而始，亦因其而终。');
+insert into card values(null,'傲娇的园艺师',3,'铜','随从','皇家护卫',3,2,'若自身场上有指挥官，则+1/+1。','进化前主人，无须担心。我会用引以为傲的大剪刀收割入侵者。请稍待片刻。');
+insert into card values(null,'权杖司令官',3,'金','随从','皇家护卫',3,2,'使自身1张士兵随从+2/+2。','简介进化前我们是这个国家的剑与盾！抵挡敌人的攻势，并将他们斩于马下，大卸八块，剁成肉酱！这就是我们存在的唯一价值！');
+insert into card values(null,'妖精公主',6,'传说','随从','精灵',4,4,'将妖精加入手牌，使自身手牌达到上限。(上限为9张)','这里是妖精的庭院。拥有纯洁之心的孩子们享有的乐园。得到光芒指引的人啊，你的心灵也同样纯洁吗?');
+insert into card values(null,'远古森林巨龙',8,'金','随从','精灵',6,8,'守护，自身其它所有随从不会被对方能力选中。','经历了悠久岁月，成为森林守护者的古龙。它爱护着妖精，以维持森林的和谐。');
+insert into card values(null,'骨头戒指',3,'铜','场地','死灵法师',0,0,'倒數2，入場曲：召喚2個骷髏士兵到戰場上。謝幕曲:死靈術2; 亡者召還2','如死亡般冰冷的戒指， 像死神一樣佇立於此。 我向它伸出手，期盼著家人的復甦');
+insert into card values(null,'神之盾‧布罗蒂雅',8,'传说','随从','主教',5,5,'守护，入场曲：这场对战中，给予自己的主战者「如果自己的战场上有护符，则自己主战者受到5以上的伤害皆转变为4」效果。主战者无法重复迭加此效果。','汝之盾在此。我将以屏障与镜刃之奥义，守护汝之一切！');
+insert into card values(null,'圣狮结晶',2,'铜','法术','主教',0,0,'召唤1只圣盾天狮到战场上。如果自己在这场对战中已使用的圣狮结晶卡片张数（不包含这张卡片）为3张以上5张以下，则会由原本的圣盾天狮转变为召唤1只圣铠天狮到战场上。如果为6张以上，则会由原本的圣盾天狮转变为召唤1只圣王天狮到战场上。爆能强化5; 增加1张圣狮结晶卡片到手牌中。','就算只是零散细碎的祈愿，最终也将成为伟大的救赎。人类啊，祈祷吧！许愿吧！――出自「通往救赎之路」--第一章');
+insert into card values(null,'沃普爾吉斯',5,'传说','随从','吸血鬼',4,4,'謝幕曲：這場對戰中，給予雙方的主戰者「自己的回合結束時，給予自己的主戰者1點傷害」效果。','稱我們為妖魔鬼怪，揚言要狩獵我們是吧。甚至還狂妄地說要給予我們正義的制裁對吧。那我就化為妖魔鬼怪，來狩獵你們吧。人類的世界已經結束了，開始魔女的狂歡之夜吧。');
+insert into card values(null,'林德沃姆',10,'传说','随从','龙',10,10,'圣龙‧林德沃姆 ‧邪龙‧林德沃姆如果这张卡片在手牌中，自己的剩余PP值为10，并且自己在这场对战中已使用的非从者卡为10张以上，则会在使用这张卡片时将其转变为命运抉择 所指定的卡片。','雷霆，划破天际。');
+insert into card values(null,'符文剑召唤师',4,'银','随从','女巫',1,1,'特性进化前号角 获得+<>/+<> 。 共鸣 +1/+1','哎，终于到我出场了?呵呵……魔力足够。好好见识一下同时操纵无数利剑的秘术吧。');
+insert into card values(null,'神之盾‧布罗蒂雅介绍',8,'传说','随从','主教',5,5,'守护，入场曲：这场对战中，给予自己的主战者「如果自己的战场上有护符，则自己主战者受到5以上的伤害皆转变为4」效果。主战者无法重复迭加此效果。','汝之盾在此。我将以屏障与镜刃之奥义，守护汝之一切！');
+insert into card values(null,'圣狮神殿',2,'银','场地','主教',0,0,'每当自己使用圣狮结晶卡片时，回复自己的PP 1点。入场曲 增加1张圣狮结晶卡片到手牌中。','面对恐惧时，切勿惧怕。面对胆怯时，切勿畏怯。救赎，就从暴露一切开始。――出自「通往救赎之路」--第四章');
+insert into card values(null,'人偶少女‧奥契丝',8,'传说','随从','复仇者',5,5,'坚毅的人偶‧奥契丝‧复仇的人偶‧奥契丝如果这张卡片在手牌中，自己剩余的PP为8以上，并且自己的手牌中悬丝傀儡卡片张数为2以上，则会在使用这张卡片时将其转变为命运抉择所指定的卡片。入场曲 增加3张悬丝傀儡卡片到手牌中。','为什么，人类会爱着人类?为什么，人类会憎恨人类?这问题的答案，一定――就在世界的某处。');
+insert into card values(null,'终末之骸',7,'传说','随从','死灵法师',6,5,'自己的回合结束时，如果自己的墓场卡片数为30张以上，则会给予敌方的主战者与敌方的从者全体6点伤害。入场曲 增加10张骷髅士兵卡片到手牌中。','世界的尽头，人世的尽头，冥界的尽头。');
+insert into card values(null,'天使之泉',1,'铜','场地','中立 ',0,0,'倒数：2入场曲，到回合结束为止，给予1个自己的从者+1/+0效果。谢幕曲 抽取1张卡片。','因担忧着人世，天使们潸然泪下。泪雨降至大地，汇集成了一潭清泉，那泉水不仅治愈了人心，亦为人们带来了祝福。――出自「天使之业」--第三章');
+insert into card values(null,'皇家剑士·奥蕾莉亚',5,'传说','随从','皇家护卫',2,6,'守护，号角，按“对方的随从数”获得+1/+0。对方的随从数为3个或3个以上，此随从不会被对方能力选中。','简介进化前惹人爱怜的白色花瓣，飘落在混浊的大地。在舞动的白刃面前，邪恶应声倒下。');
+insert into card values(null,'恒闇之枭',3,'金','随从','死灵法师',3,2,'每当自己发动葬送时，回复自己的主战者1点生命值。入场曲如果葬送已发动，则会随机将1张死灵法师从者卡，由自己的牌堆抽取到手牌中。','就算想逃也是没用的。死亡可看透黑夜，并安静地在夜空中飞舞。');
+insert into card values(null,'巨魂猎手',3,'银','随从','死灵法师',2,3,'入场曲：如果敌方的战场上有攻击力为5以上的从者，则会发动死灵术 6; 随机破坏1个攻击力为5以上的敌方从者。','我对小不点没有兴趣。');
+insert into card values(null,'骷髅王子',6,'金','随从','死灵法师',2,3,'入場曲：召喚1個骷髏騎士到戰場上。謝幕曲 召喚1個骷髏士兵到戰場上。','你知道嗎?我家可是王族世家，很偉大吧?覺得恐怖的話還不跪下。還不快說聲「請饒了我一命」來聽聽！');
+insert into card values(null,'阿努比斯',7,'银','随从','死灵法师',5,5,'入場曲：如果葬送，已發動，則會破壞1個攻擊力最高的敵方從者（如果攻擊力最高的從者為複數時，則會隨機在其中選擇1個）。','祂是冥府的審判者，裁量人們的罪刑，審判靈魂去路的神。眼光銳利，就連天秤的微微晃動也逃不過祂的法眼。');
+insert into card values(null,'骚灵现象',3,'银','场地','死灵法师',0,0,'召唤2个怨灵到战场上。爆能强化 4;给予自己的从者全体「这个从者消失时，转变为被破坏」效果。','看不见幽灵，也不一定是件幸福的事。');
 
+-- 删除用户表
+drop table user;
 -- 创建用户表
 create table svcms.user(
     id int primary key not null auto_increment comment '用户id',
     username varchar(20) not null comment '用户名',
-    password varchar(20) not null comment '密码'
+    password varchar(200) not null comment '密码'
 ) engine=InnoDB comment '用户信息表';
 
 -- 使用数据库
@@ -39,3 +62,6 @@ select * from user;
 
 -- 插入一个管理用户
 insert into user values(null,'admin','123123');
+
+-- 删除卡牌表
+drop table card;

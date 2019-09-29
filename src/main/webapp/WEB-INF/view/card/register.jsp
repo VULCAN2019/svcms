@@ -29,7 +29,7 @@
             </div>
             <h3>欢迎注册</h3>
             <p>创建一个新账户</p>
-            <form class="m-t" role="form" action="/register" method="post">
+            <form class="m-t" role="form" action="${pageScope.request.contextPath}/register?method=register" method="post">
                 <div class="form-group">
                     <input name="username" type="text" class="form-control" placeholder="请输入用户名" required="">
                 </div>
@@ -49,7 +49,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">注 册</button>
 
-                <p class="text-muted text-center"><small>已经有账户了？</small><a href="login.jsp">点此登录</a>
+                <p class="text-muted text-center"><small>已经有账户了？</small><a href="${pageScope.request.contextPath}/login?method=toLogin">点此登录</a>
                 </p>
 
             </form>

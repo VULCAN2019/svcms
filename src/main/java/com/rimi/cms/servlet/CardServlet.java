@@ -212,14 +212,14 @@ public class CardServlet extends BaseServlet {
             // 判断用户是否输入了内容，如果没有输入就直接进入这里面
             if (StringUtils.isEmpty(params.get(s)[0])) {
                 request.setAttribute("info","卡牌添加失败！");
-                return "/card/index_v3";
+                return "card/index_v3";
             }
         }
         // 调用service中的保存方法
         cardService.save(params);
         request.setAttribute("info","卡牌添加成功~");
 
-        return "/card/index_v3";
+        return "card/index_v3";
     }
 
     /**
@@ -394,7 +394,7 @@ public class CardServlet extends BaseServlet {
 
 
 
-        return "/card/index_v5";
+        return "card/index_v5";
 
 
     }
@@ -444,7 +444,7 @@ public class CardServlet extends BaseServlet {
         //// 设置信息到作用域
         //request.setAttribute("cards",cards);
 
-        return "/card/index_v5";
+        return "card/index_v5";
 
 
     }

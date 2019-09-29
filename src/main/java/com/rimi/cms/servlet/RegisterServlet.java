@@ -1,5 +1,6 @@
 package com.rimi.cms.servlet;
 
+import com.rimi.cms.common.BaseServlet;
 import com.rimi.cms.dao.IUserDao;
 import com.rimi.cms.dao.impl.UserDaoImpl;
 import com.rimi.cms.entity.User;
@@ -21,12 +22,11 @@ import java.io.IOException;
  * @date 2019/9/27 17:10
  */
 @WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+public class RegisterServlet extends BaseServlet {
 
     private ILoginService loginService = new LoginServiceImpl();
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    public String doRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
         // 判断用户名和密码是否为空
@@ -45,35 +45,42 @@ public class RegisterServlet extends HttpServlet {
                     // 判断是否存在该用户
                     if (loginService.checkUsername(user)) {
                         // 判断是否创建成功
-                        if (loginService.register(username,password)){
-                            request.setAttribute("success","注册成功，请登录吧！");
-                            request.getRequestDispatcher("/login.jsp").forward(request, response);
+                        if (loginService.register(username, password)) {
+                            request.setAttribute("success", "注册成功，请登录吧！");
+
+                            return "/card/login";
                         }
                     } else {
-                        request.setAttribute("error","该用户名已存在");
-                        request.getRequestDispatcher("/register.jsp").forward(request, response);
+                        request.setAttribute("error", "该用户名已存在");
+
+                        return "/card/register";
                     }
                 } else {
                     request.setAttribute("error", "请查看协议并同意");
                     request.getRequestDispatcher("/register.jsp").forward(request, response);
+                    return "/card/register";
                 }
             } else {
-                request.setAttribute("error","两次输入的密码不相同");
-                request.getRequestDispatcher("/register.jsp").forward(request, response);
+                request.setAttribute("error", "两次输入的密码不相同");
+
+                return "/card/register";
             }
         } else {
-            request.setAttribute("error","账号或密码不得为空");
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            request.setAttribute("error", "账号或密码不得为空");
+
+            return "/card/register";
         }
-
-
-
-
+        return "";
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+
+    public String doToRegister(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
-        this.doPost(request, response);
+
+        return "card/register";
+
     }
+
+
+
 }
