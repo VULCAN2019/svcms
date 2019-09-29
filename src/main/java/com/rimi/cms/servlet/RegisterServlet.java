@@ -57,7 +57,7 @@ public class RegisterServlet extends BaseServlet {
                     }
                 } else {
                     request.setAttribute("error", "请查看协议并同意");
-                    request.getRequestDispatcher("/register.jsp").forward(request, response);
+                    //request.getRequestDispatcher("/register.jsp").forward(request, response);
                     return "/card/register";
                 }
             } else {

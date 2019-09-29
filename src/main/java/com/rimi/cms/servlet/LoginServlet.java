@@ -72,7 +72,7 @@ public class LoginServlet extends BaseServlet {
         // 设置错误信息
         request.setAttribute("error", ErrorConstant.LOGIN_ERROR.getMsg());
         // 将信息转发到页面上去
-        request.getRequestDispatcher("/login_v2.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/view/card/login.jsp").forward(request, response);
     }
 
 
