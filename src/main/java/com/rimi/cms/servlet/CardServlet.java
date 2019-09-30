@@ -215,10 +215,15 @@ public class CardServlet extends BaseServlet {
                 return "card/index_v3";
             }
         }
-        // 调用service中的保存方法
-        cardService.save(params);
-        request.setAttribute("info","卡牌添加成功~");
 
+        // 判断是否添加成功
+        if (cardService.save(params)) {
+            request.setAttribute("info","卡牌添加成功~");
+        } else {
+            request.setAttribute("info","卡牌添加失败！");
+        }
+
+        // 调用service中的保存方法
         return "card/index_v3";
     }
 

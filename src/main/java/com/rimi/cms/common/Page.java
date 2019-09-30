@@ -45,13 +45,21 @@ public class Page<T> {
         return page;
     }
 
+    /**
+     * 获取当前页面后，判断当前页是否大于0
+     * @return
+     */
     public int getCurrentSize() {
         Integer cp = this.currentPage;
+        //判断当前页是否大于0
         if (cp > 0) {
+            //大于0后点击前一页就跳到前一页的页面数据
             cp -= 1;
         } else {
+            // 否则就没法再下一边
             cp = 0;
         }
+
         // 判断分页开始的位置是否大于总条数
         int currentSize = cp * this.pageSize;
         if (currentSize > this.totalCount){

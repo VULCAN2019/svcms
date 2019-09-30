@@ -522,7 +522,7 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="/login?method=welcome"
-                    frameborder="0" data-id="/login?method=welcome" seamless></iframe>
+                    frameborder="0" data-id="/logout" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">&copy; 2019-2019 <a href="http://www.zi-han.net/" target="_blank">嘿一咻嘿一咻</a>

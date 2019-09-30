@@ -25,7 +25,8 @@ public class LogoutServlet extends HttpServlet {
         // 销毁session
         session.invalidate();
         // 重定向
-        response.sendRedirect(request.getContextPath() + "/login");
+        //response.sendRedirect(request.getContextPath() + "/login");
+        request.getRequestDispatcher("/WEB-INF/view/card/login.jsp").forward(request, response);
     }
 
     @Override

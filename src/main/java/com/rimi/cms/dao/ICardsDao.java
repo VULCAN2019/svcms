@@ -29,7 +29,7 @@ public interface ICardsDao {
 
     Card selectForOne(String id );
 
-    void insert(Map<String, String[]> params);
+    int insert(Map<String, String[]> params);
 
     void update(Map<String, String[]> modifyInfo);
 

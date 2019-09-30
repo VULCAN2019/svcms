@@ -82,9 +82,9 @@ public class CardServiceImpl implements ICardService {
      * @param params 一张卡牌的信息所组成的map集合
      */
     @Override
-    public void save(Map<String, String[]> params) {
+    public boolean save(Map<String, String[]> params) {
         // 调用dao层插入方法，把数据插入到数据库
-        cardsDao.insert(params);
+        return cardsDao.insert(params)==1;
     }
 
     /**

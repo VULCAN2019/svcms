@@ -171,12 +171,12 @@ public class CardsDaoImpl implements ICardsDao {
      * @param params 装着卡牌信息的map集合
      */
     @Override
-    public void insert(Map<String, String[]> params) {
+    public int insert(Map<String, String[]> params) {
         // 1.定义sql
         String sql = "insert into card(card_id,card_name,card_cost,card_level,card_type,card_faction,card_atk," +
                 "card_hp,card_power,card_intro) values(null,?,?,?,?,?,?,?,?,?)";
         // 执行插入
-        JDBCUtils.executeUpdate(sql,
+        int i = JDBCUtils.executeUpdate(sql,
                 params.get("cardName")[0],
                 params.get("cardCost")[0],
                 params.get("cardLevel")[0],
@@ -186,6 +186,7 @@ public class CardsDaoImpl implements ICardsDao {
                 params.get("cardHp")[0],
                 params.get("cardPower")[0],
                 params.get("cardIntro")[0]);
+        return i;
     }
 
     /**

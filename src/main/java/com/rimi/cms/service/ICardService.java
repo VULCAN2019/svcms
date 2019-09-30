@@ -27,7 +27,7 @@ public interface ICardService {
 
     void deleteById(Integer id);
 
-    void save(Map<String, String[]> params);
+    boolean save(Map<String, String[]> params);
 
     void deleteByIds(String[] ids);
 
