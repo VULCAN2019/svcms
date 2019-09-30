@@ -19,7 +19,7 @@ public interface ICardService {
      */
     List<Card> getAll();
 
-    List<Card> findPageCard(Map<String, String[]> params);
+    List<Card> findAllCard(Map<String, String[]> params);
 
     Card findById(String id);
 

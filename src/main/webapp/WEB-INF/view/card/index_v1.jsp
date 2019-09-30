@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="/layui/css/layui.css">
     <script>
         function sendAjax() {
-            $.post("/cards?method=all","", function (result) {
+            $.post("/cards?method=all", "", function (result) {
                 console.log(result);
                 alert(result);
             }, 'json');
@@ -29,14 +29,14 @@
     </script>
 </head>
 <style>
-    tr th,td{
+    tr th, td {
         text-align: center;
-        margin:0 auto;
+        margin: 0 auto;
     }
 </style>
 
 <body class="gray-bg">
-<form class="search-form" action="${pageContext.request.contextPath}/cards?method=all" method="post" ></form>
+<form class="search-form" action="${pageContext.request.contextPath}/cards?method=all" method="post"></form>
 <table class="table table-hover " style="text-align: center">
     <tr class="info">
         <th>ID</th>
@@ -51,26 +51,29 @@
         <th>卡牌简介</th>
     </tr>
 
-<%--未分页的版本--%>
-<%--    <c:forEach items="${cards}" var="card" varStatus="s">--%>
-<%--        <tr class="active" style="--%>
-<%--            &lt;%&ndash;        <c:if test="${s.count % 2 == 1}">background-color:rgba(164,255,245,0.07);</c:if>&ndash;%&gt;--%>
-<%--            &lt;%&ndash;        <c:if test="${s.count % 2 == 0}">background-color:rgba(28,202,238,0.1);</c:if>&ndash;%&gt;--%>
-<%--                ">--%>
-<%--            <td class="td-hover">${card.cardId}</td>--%>
-<%--            <td>${card.cardName}</td>--%>
-<%--            <td>${card.cardCost}</td>--%>
-<%--            <td>${card.cardLevel}</td>--%>
-<%--            <td>${card.cardType}</td>--%>
-<%--            <td>${card.cardFaction}</td>--%>
-<%--            <td>${card.cardAtk}</td>--%>
-<%--            <td>${card.cardHp}</td>--%>
-<%--            <td width="350px;">${card.cardPower}</td>--%>
-<%--            <td width="350px;">${card.cardIntro}</td>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
+    <%--未分页的版本--%>
+
+    <%--    <c:forEach items="${cards}" var="card" varStatus="s">--%>
+    <%--        <tr class="active" style="--%>
+    <%--            &lt;%&ndash;        <c:if test="${s.count % 2 == 1}">background-color:rgba(164,255,245,0.07);</c:if>&ndash;%&gt;--%>
+    <%--            &lt;%&ndash;        <c:if test="${s.count % 2 == 0}">background-color:rgba(28,202,238,0.1);</c:if>&ndash;%&gt;--%>
+    <%--                ">--%>
+    <%--            <td class="td-hover">${card.cardId}</td>--%>
+    <%--            <td>${card.cardName}</td>--%>
+    <%--            <td>${card.cardCost}</td>--%>
+    <%--            <td>${card.cardLevel}</td>--%>
+    <%--            <td>${card.cardType}</td>--%>
+    <%--            <td>${card.cardFaction}</td>--%>
+    <%--            <td>${card.cardAtk}</td>--%>
+    <%--            <td>${card.cardHp}</td>--%>
+    <%--            <td width="350px;">${card.cardPower}</td>--%>
+    <%--            <td width="350px;">${card.cardIntro}</td>--%>
+    <%--        </tr>--%>
+    <%--    </c:forEach>--%>
+
 
     <%--    分页了的版本    --%>
+
     <c:forEach items="${page.pageData}" var="card">
         <tr class="active">
             <td class="td-hover">${card.cardId}</td>
@@ -116,7 +119,7 @@
                         <a href="javaScript:void(0);" data-page="${p}" class="page">${p}</a>
                     </li>
                 </c:if>
-            </c:forEach>
+            </c:forEach> <%-- 当前页面             总页面 --%>
             <c:if test="${page.currentPage < page.pageCount}">
                 <li>
                     <a href="javaScript:void(0);" data-page="${page.currentPage + 1}" class="page">
@@ -129,15 +132,13 @@
 </div>
 
 
-
-
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/plugins/layer/layer.min.js"></script>
 <script src="js/content.min.js"></script>
 <script src="js/welcome.min.js"></script>
 <script>
-    $(function(){
+    $(function () {
         // 监听a标签的点击事件
         $('.page').click(function () {
             //获取a标签中的页码

@@ -30,7 +30,7 @@
     </error-page>
     <!--错误页面-->
     <error-page>
-        <error-code>404</error-code>
+        <error-code>500</error-code>
         <location>/error/500.jsp</location>
     </error-page>
 

@@ -26,7 +26,7 @@ public class LoginServlet extends BaseServlet {
     public String doToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
-        return "redirect:/card/login";
+        return "card/login";
 
     }
 
@@ -81,7 +81,7 @@ public class LoginServlet extends BaseServlet {
         // 判断用户是否勾选remember
         if (remember != null) {
             CookieUtils.setCookie("username", username, 7 * 24 * 60 * 60, response);
-            CookieUtils.setCookie("password", password, response);
+            CookieUtils.setCookie("password", password,7 * 24 * 60 * 60, response);
         }
         // 判断用户 是否勾选七天免登录
         if (quicklogin != null) {

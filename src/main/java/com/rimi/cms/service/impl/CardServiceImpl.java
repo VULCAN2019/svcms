@@ -16,7 +16,10 @@ import java.util.Map;
  */
 public class CardServiceImpl implements ICardService {
 
-    ICardsDao cardsDao = new CardsDaoImpl();
+    /**
+     * 初始化一个全局对象
+     */
+    private ICardsDao cardsDao = new CardsDaoImpl();
 
     /**
      * 获取所有卡片
@@ -29,25 +32,28 @@ public class CardServiceImpl implements ICardService {
         return cardsDao.selectAll();
     }
 
+    /**
+     * 查找所有卡牌
+     *
+     * @param parms 找到的所有卡牌组成的一个集合map集合
+     * @return 返回找到的卡牌集合
+     */
     @Override
-    public List<Card> findPageCard(Map<String, String[]> parms) {
+    public List<Card> findAllCard(Map<String, String[]> parms) {
         // 根据条件查询所有的记录
         Integer count = cardsDao.count(parms);
 
         // 调用方法
-        List<Card> cards = cardsDao.selectByPage(parms);
+        List<Card> cards = cardsDao.selectByAll(parms);
         return cards;
     }
 
 
-
-
-
-
     /**
      * 根据id获取到所选数据，并删除
-     * @param id
-     * @return
+     *
+     * @param id 将被删除的卡牌的id
+     * @return 返回找到的结果
      */
     @Override
     public Card findById(String id) {
@@ -58,12 +64,23 @@ public class CardServiceImpl implements ICardService {
         return null;
     }
 
+    /**
+     * 根据id查询卡牌
+     *
+     * @param id 将被查询的卡牌id
+     * @return 返回查询到的卡牌
+     */
     @Override
     public Card findForOne(String id) {
         return cardsDao.selectForOne(id);
     }
 
 
+    /**
+     * 插入数据
+     *
+     * @param params 一张卡牌的信息所组成的map集合
+     */
     @Override
     public void save(Map<String, String[]> params) {
         // 调用dao层插入方法，把数据插入到数据库
@@ -72,6 +89,7 @@ public class CardServiceImpl implements ICardService {
 
     /**
      * 删除一条数据
+     *
      * @param id 将被删除的数据
      */
     @Override
@@ -81,6 +99,7 @@ public class CardServiceImpl implements ICardService {
 
     /**
      * 删除一堆数据
+     *
      * @param ids 将被删除的一堆数据
      */
     @Override
@@ -90,11 +109,23 @@ public class CardServiceImpl implements ICardService {
         }
     }
 
+    /**
+     * 更新卡牌信息
+     *
+     * @param modifyInfo 这里装着卡牌将被修改后的卡牌信息
+     */
     @Override
     public void update(Map<String, String[]> modifyInfo) {
         cardsDao.update(modifyInfo);
     }
 
+    /**
+     * 查询所有卡牌并分页显示
+     *
+     * @param page  分页对象
+     * @param parms 存着查询条件的map集合
+     * @return 返回一个page对象，一个page对象里存着一页里将被显示的卡牌
+     */
     @Override
     public Page<Card> myFindPageCard(Page page, Map<String, String[]> parms) {
         // 根据条件查询所有的卡牌，没有条件的话就能查到所有的卡牌
@@ -106,7 +137,7 @@ public class CardServiceImpl implements ICardService {
         // 然后根据方法里面根据条件，总页数，页码数，
         // 返回一个分页后找到的所有卡牌组成的list集合
         List<Card> cards = cardsDao.mySelectByPage(page.getCurrentSize(),
-                page.getPageSize(),parms);
+                page.getPageSize(), parms);
 
         // 传入一个分页后查询到的卡牌集合
         page.setPageData(cards);

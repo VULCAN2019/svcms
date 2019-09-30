@@ -39,9 +39,13 @@
                 <form method="post" action="${pageScope.request.contextPath}/login?method=login" >
                     <h4 class="no-margins">登录：</h4>
                     <p class="m-t-md">登录到后台管理系统</p>
-                    <input name="username" type="text" class="form-control uname" value="${requestScope.username}" placeholder="用户名" />
-                    <input name="password" type="password" class="form-control pword m-b" value="${requestScope.password}" placeholder="密码" />
+                    <input name="username" type="text" class="form-control uname" value="${cookie.username.value}" placeholder="用户名" />
+                    <input name="password" type="password" class="form-control pword m-b" value="${cookie.password.value}" placeholder="密码" />
 <!--                    <a href="">忘记密码了？</a>-->
+                    <input type="checkbox" name="remember">七天免密
+<%--                    <input style="margin-left:95px;" type="checkbox" name="quicklogin">快速登陆--%>
+                    <br>
+                    <br>
                     <strong>还没有账号？ <a href="${pageScope.request.contextPath}/register?method=toRegister">立即注册&raquo;</a></strong>
                     <button class="btn btn-success btn-block">登录</button>
                     <strong>

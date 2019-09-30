@@ -21,7 +21,7 @@ public interface ICardsDao {
 
     Integer count(Map<String, String[]> parms);
 
-    List<Card> selectByPage(Map<String, String[]> parms);
+    List<Card> selectByAll(Map<String, String[]> parms);
 
     void deleteById(Integer id);
 

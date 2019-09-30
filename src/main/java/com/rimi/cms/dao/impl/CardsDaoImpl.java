@@ -29,6 +29,10 @@ public class CardsDaoImpl implements ICardsDao {
         return JDBCUtils.executeQuery(Card.class, sql);
     }
 
+    /**
+     * 查询数据的总条数
+     * @return 返回数据的总条数
+     */
     @Override
     public Integer count() {
         // 定义sql
@@ -38,10 +42,10 @@ public class CardsDaoImpl implements ICardsDao {
     }
 
     /**
-     * 模糊查询
+     * 模糊查询查询到结果的总页数
      *
-     * @param parms
-     * @return
+     * @param parms 这里面存着查询的条件
+     * @return 返回查询到的总页数
      */
     @Override
     public Integer count(Map<String, String[]> parms) {
@@ -80,13 +84,13 @@ public class CardsDaoImpl implements ICardsDao {
     }
 
     /**
-     * 查询所需查询业数的数据
+     * 模糊查询所有满足条件的数据，但不分页
      *
-     * @param parms
-     * @return
+     * @param parms 装着查询体检的集合
+     * @return 返回找到的所有卡牌
      */
     @Override
-    public List<Card> selectByPage(Map<String, String[]> parms) {
+    public List<Card> selectByAll(Map<String, String[]> parms) {
         // 根据条件拼接sql
         StringBuffer sql = new StringBuffer("select * from card where 1 = 1");
         List<Object> parmsSql = new ArrayList<>();
@@ -133,6 +137,11 @@ public class CardsDaoImpl implements ICardsDao {
         JDBCUtils.executeUpdate(sql, id);
     }
 
+    /**
+     * 根据id查询到数据
+     * @param id 将被查询的id号
+     * @return 返回查询到满足条件的一张卡牌集合
+     */
     @Override
     public Card selectById(String id) {
         // 定义sql
@@ -141,6 +150,11 @@ public class CardsDaoImpl implements ICardsDao {
         return JDBCUtils.executeQueryForOne(Card.class, sql, id);
     }
 
+    /**
+     * 根据id查询一张卡牌
+     * @param id 将被查询的id号
+     * @return 返回一张卡牌
+     */
     @Override
     public Card selectForOne(String id) {
         String sql = "select * from card where card_id =?";
@@ -152,6 +166,10 @@ public class CardsDaoImpl implements ICardsDao {
 
     }
 
+    /**
+     * 插入一张卡牌
+     * @param params 装着卡牌信息的map集合
+     */
     @Override
     public void insert(Map<String, String[]> params) {
         // 1.定义sql
@@ -170,6 +188,10 @@ public class CardsDaoImpl implements ICardsDao {
                 params.get("cardIntro")[0]);
     }
 
+    /**
+     * 更新卡牌信息
+     * @param modifyInfo 这里装着将被修改后的卡牌数据信息
+     */
     @Override
     public void update(Map<String, String[]> modifyInfo) {
         // 定义sql
@@ -190,6 +212,7 @@ public class CardsDaoImpl implements ICardsDao {
     }
 
     /**
+     * 模糊查询满足条件的数据并分页显示
      *
      * @param currentSize   当前的页码
      * @param pageSize  页面显示的条数
