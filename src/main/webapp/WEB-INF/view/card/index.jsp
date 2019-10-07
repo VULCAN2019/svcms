@@ -64,16 +64,16 @@
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=all"
-                            <%--onclick="sendAjax()"--%>>所有卡牌</a>
+                            <a class="J_menuItem"  href="${pageContext.request.contextPath}/cards?method=toAll"
+                            >所有卡牌</a>
                         </li>
                         <li>
                             <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toSelect"
-                            <%--onclick="sendAjax()"--%>>查找卡牌</a>
+                            >查找卡牌</a>
                         </li>
                         <li>
                             <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toInsert"
-                            <%--onclick="sendAjax()"--%>>增加卡牌</a>
+                            >增加卡牌</a>
                         </li>
                         <li>
                             <a class="J_menuItem" href="${pageContext.request.contextPath}/cards?method=toDel">删除卡片</a>

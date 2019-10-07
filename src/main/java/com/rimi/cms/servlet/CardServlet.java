@@ -3,6 +3,7 @@ package com.rimi.cms.servlet;
 import com.alibaba.fastjson.JSONObject;
 import com.rimi.cms.common.BaseServlet;
 
+import com.rimi.cms.common.LayuiData;
 import com.rimi.cms.common.Page;
 import com.rimi.cms.entity.Card;
 import com.rimi.cms.service.ICardService;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -38,17 +40,25 @@ public class CardServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    public String doToAll(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    public String doToIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
         return "card/index";
     }
 
+    /**
+     * 跳转到第一个页面
+     * @param request
+     * @param response
+     * @return
+     * @throws ServletException
+     * @throws IOException
+     */
+    public String doToAll(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+            IOException {
 
-
-
-
-
+        return "card/index_v1";
+    }
 
 
 
@@ -60,17 +70,11 @@ public class CardServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    public String doAll(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    public void doAll(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
-        // 响应数据
-        //response.setContentType("text/html;charset=utf-8");
-        // fastJson核心类 JSONObject
-        //JSONObject jo = new JSONObject();
-
-
 
         // 获取分页的参数(当前第几页)，因为没有设置过“p”的值，所以默认为0
-        String currentPage = request.getParameter("p");
+        String currentPage = request.getParameter("page");
         // 正因为为0，所以这里半段是否为空是返回true的
         if(StringUtils.isEmpty(currentPage)) {
             // 初始化当前页数为1
@@ -88,16 +92,32 @@ public class CardServlet extends BaseServlet {
         // 调用分页方法获取数据，这个数据里面放了一页里能存放的所有卡牌
         Page<Card> cardsPage = cardService.myFindPageCard(page, parms);
         // 把分页的信息发送到页面
-        request.setAttribute("page",cardsPage);
-
-
-
-
+        //request.setAttribute("page",cardsPage);
         //List<Card> cards = cardService.getAll();
-        //
         //request.setAttribute("cards",cards);
         //
-        return "card/index_v1";
+        //String currentPage = request.getParameter("page");
+        //String limit = request.getParameter("limit");
+        //Page page = Page.of(Integer.valueOf(currentPage));
+        //page.setPageSize(Integer.valueOf(limit));
+        //// 调用分页方法获取数据
+        //Map<String, String[]> parms = request.getParameterMap();
+        //Page<Card> cardsPage = cardService.myFindPageCard(page, parms);
+
+        LayuiData layuiData = new LayuiData();
+        layuiData.setCode(0);
+        layuiData.setCount(cardsPage.getTotalCount());
+        layuiData.setMsg("");
+        layuiData.setData(cardsPage.getPageData());
+        //// 把对象转成JSON
+        String jsonString = JSONObject.toJSONString(layuiData);
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter writer = response.getWriter();
+        writer.print(jsonString);
+        writer.close();
+
+
+        //return "card/index_v1";
     }
 
 
@@ -278,10 +298,13 @@ public class CardServlet extends BaseServlet {
     public void doDel(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
+
         // 获取参数
         String[] ids = request.getParameterValues("id[]");
         // 调用根据id删除数据的方法
         cardService.deleteByIds(ids);
+
+        doAll(request, response);
 
     }
 
@@ -355,7 +378,7 @@ public class CardServlet extends BaseServlet {
         return "card/index_v5";
     }
 
-    public String doModify(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    public void doModify(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
         // ----------------------未分页版本------------------------
@@ -363,9 +386,9 @@ public class CardServlet extends BaseServlet {
 
         cardService.update(modifyInfo);
         // 获取所有卡牌信息
-        List<Card> cards = cardService.getAll();
+        //List<Card> cards = cardService.getAll();
         // 设置信息到作用域
-        request.setAttribute("cards",cards);
+        //request.setAttribute("cards",cards);
 
 
         // -----------------------分页版本------------------------
@@ -398,8 +421,8 @@ public class CardServlet extends BaseServlet {
 
 
 
-
-        return "card/index_v5";
+        doAll(request, response);
+        //return "card/index_v5";
 
 
     }

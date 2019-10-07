@@ -90,7 +90,7 @@ public class LoginServlet extends BaseServlet {
             request.getSession().setMaxInactiveInterval(7 * 24 * 60 * 60);
         }
         // 成功后跳转到另外一个页面
-        response.sendRedirect(request.getContextPath() + "/cards?method=toAll");
+        response.sendRedirect(request.getContextPath() + "/cards?method=toIndex");
 
     }
 

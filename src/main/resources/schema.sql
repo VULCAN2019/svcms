@@ -2,7 +2,7 @@
 drop database if exists svcms;
 -- 创建数据库
 create database svcms default character set utf8 collate utf8_unicode_ci;
--- 如果比哦存在，则删除表
+-- 如果卡牌 表存在，则删除表
 drop table if exists svcms.card;
 -- 创建卡牌表
 create table svcms.card

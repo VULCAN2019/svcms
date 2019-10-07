@@ -15,7 +15,8 @@
     <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
 
     <link href="css/animate.min.css" rel="stylesheet">
-    <link href="css/style.min.css?v=4.0.0" rel="stylesheet"><base target="_blank">
+    <link href="css/style.min.css?v=4.0.0" rel="stylesheet">
+
 
 </head>
 

@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 分页
  *
- * @author shangzf
+ * @author june
  * @date 2019/9/16 9:35
  */
 public class Page<T> {
@@ -20,7 +20,7 @@ public class Page<T> {
     /**
      * 每页显示条数
      */
-    private Integer pageSize = 8;
+    private Integer pageSize = 10;
     /**
      * 总条数
      */
