@@ -16,19 +16,10 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/style.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/layui/css/layui.css" media="all">
 
-    <%--    <script>--%>
-    <%--        function sendAjax() {--%>
-    <%--            $.post("/cards?method=all", "", function (result) {--%>
-    <%--                console.log(result);--%>
-    <%--                alert(result);--%>
-    <%--            }, 'json');--%>
-    <%--        }--%>
-    <%--    </script>--%>
 
     <script>
         var i = 0;
@@ -61,26 +52,7 @@
             }
         }
 
-        var infos = {};
-
-        function sendAjax() {
-            $.ajax({
-                url: '${pageContext.request.contextPath}/cards?method=modify',
-                type: 'post',
-                data: {'infos': infos},
-                success: function (result) {
-                    // 刷新页面
-                    //window.location.reload();
-                },
-                error: function () {
-                    alert("添加失败了");
-                }
-            });
-        }
-
-
     </script>
-
 
 
 </head>
@@ -102,11 +74,86 @@
 
 </div>
 
-<div class="layui-btn-group demoTable">
-    <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-    <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-    <button class="layui-btn" data-type="isAll">验证是否全选</button>
+
+<div class="layui-form">
+    <div style="width:300px;display:inline-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label">查费用</label>
+            <div class="layui-input-block" style="width:150px">
+                <select name="cardCost" id="search_card_cost" lay-verify="">
+                    <option value=""></option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div style="width:300px;display:inline-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label">查等级</label>
+            <div class="layui-input-block" style="width:150px;">
+                <select name="cardLevel" id="search_card_level" lay-verify="">
+                    <option value=""></option>
+                    <option value="铜">铜</option>
+                    <option value="银">银</option>
+                    <option value="金">金</option>
+                    <option value="传说">传说</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div style="width:300px;display:inline-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label">查类型</label>
+            <div class="layui-input-block" style="width:150px;">
+                <select name="cardType"  id="search_card_type" lay-verify="">
+                    <option value=""></option>
+                    <option value="随从">随从</option>
+                    <option value="法术">法术</option>
+                    <option value="场地">场地</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div style="width:300px;display:inline-block">
+        <div class="layui-form-item">
+            <label class="layui-form-label">查阵营</label>
+            <div class="layui-input-block" style="width:150px;">
+                <select name="cardFaction" id="search_card_faction" lay-verify="">
+                    <option value=""></option>
+                    <option value="中立">中立</option>
+                    <option value="龙族">龙族</option>
+                    <option value="精灵">精灵</option>
+                    <option value="主教">主教</option>
+                    <option value="女巫">女巫</option>
+                    <option value="复仇者">复仇者</option>
+                    <option value="吸血鬼">吸血鬼</option>
+                    <option value="死灵法师">死灵法师</option>
+                    <option value="皇家护卫">皇家护卫</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="search">立即查询</button>
+<%--            <button type="reset" class="layui-btn layui-btn-primary">重置</button>--%>
+        </div>
+    </div>
 </div>
+<div class="layui-btn-group demoTable">
+    <button class="layui-btn layui-btn-danger" id="delAll">删除已选数据</button>
+</div>
+
 
 <table class="layui-table" lay-filter="demo" lay-data="{
  limit:10,
@@ -144,7 +191,7 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <form class="layui-form form-horizontal" action=""  >
+                        <form class="layui-form form-horizontal" action="">
                             <div style="width:900px; display:none;" class="form-group">
                                 <label for="cardId" class="col-md-2 control-label">卡牌Id:</label>
                                 <div class="col-md-6">
@@ -241,7 +288,7 @@
                                 </div>
                             </div>
                             <div style="width:560px;" class="form-group text-center">
-                                <button  class="layui-btn" lay-submit lay-filter="formDemo" >提交</button>
+                                <button class="layui-btn" lay-submit lay-filter="formDemo1">提交</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             </div>
                         </form>
@@ -264,18 +311,26 @@
 
 <script src="/layui/layui.js" charset="utf-8"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/content.min.js"></script>
+<script src="js/welcome.min.js"></script>
 <script>
+    var ids = [];
+    layui.use(['table','form'], function () {
+        var $ = layui.$,
+        table = layui.table,
+        form = layui.form;
 
-
-    layui.use('table', function () {
-        var table = layui.table;
-
-        var $ = layui.$, active = {
+        var active = {
             reload: function () {
                 var demoReload = $('#demoReload');
 
                 //执行重载
-                table.reload('testReload', {
+                table.reload('idTest', {
                     page: {
                         curr: 1 //重新从第 1 页开始
                     }
@@ -287,7 +342,6 @@
                 }, 'data');
             }
         };
-
         $('.demoTable .layui-btn').on('click', function () {
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
@@ -310,7 +364,15 @@
 
         //监听表格复选框选择
         table.on('checkbox(demo)', function (obj) {
-            console.log(obj)
+            ids = [];
+            //console.log(obj.data.cardId);
+            var checkStatus = table.checkStatus('idTest')
+                , data = checkStatus.data;
+            for (var i = 0; i < data.length; i++) {
+                ids[i] = data[i].cardId;
+            }
+            console.log(ids);
+
         });
 
         //监听工具条
@@ -333,6 +395,7 @@
                             'id[]': data.cardId
                         }
                     });
+                    layer.msg("删除成功", {time: 1000});
                 });
             } else if (obj.event === 'edit') {
                 // layer.alert('编辑行：<br>' + JSON.stringify(data.cardId))
@@ -340,63 +403,94 @@
             }
         });
 
-        var $ = layui.$, active = {
-            getCheckData: function () { //获取选中数据
-                var checkStatus = table.checkStatus('idTest')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-            , getCheckLength: function () { //获取选中数目
-                var checkStatus = table.checkStatus('idTest')
-                    , data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
-            }
-            , isAll: function () { //验证是否全选
-                var checkStatus = table.checkStatus('idTest');
-                layer.msg(checkStatus.isAll ? '全选' : '未全选')
-            }
-        };
+        //监听提交,模糊查询表单
+        form.on('submit(formDemo2)', function (data) {
+            console.log(JSON.stringify(data.field));
+            $.ajax({
+                type: 'post',
+                dataType: 'json',
+                data: data.field,
+                url: '${pageContext.request.contextPath}/cards?method=select',
+                success: function (data) {
+                    console.log(":"+data);
+                    // 无感刷新，体验超棒
+                    $(".layui-laypage-btn")[0].click();
+                    layer.msg("查询成功",{time:  1000});
 
-        $('.demoTable .layui-btn').on('click', function () {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
+                },
+                error: function (data) {
+                    layer.alert("查询失败");
+                }
+            });
+            return false;
         });
-    });
 
-
-    layui.use('form', function(){
-        var form = layui.form;
-
-        //监听提交
-        form.on('submit(formDemo)', function(data){
+        //监听提交，修改信息提交的表单
+        form.on('submit(formDemo1)', function (data) {
             // layer.msg(JSON.stringify(data.field));
             $.ajax({
                 type: 'post',
                 dataType: 'json',
                 data: data.field,
                 url: '${pageContext.request.contextPath}/cards?method=modify',
-                success : function(data){
-                    layer.msg("修改成功",{time:  1000});
+                success: function (data) {
+                    layer.msg("修改成功", {time: 1000});
                     // 无感刷新，体验超棒
                     $("button.layui-laypage-btn").click();
                 },
-                error: function(data){
+                error: function (data) {
                     layer.alert("修改失败");
 
                 }
             });
             return false;
         });
+
+        $("#search").on('click',function(){
+            var cardCost = $("#search_card_cost");
+            var cardLevel = $("#search_card_level");
+            var cardType = $("#search_card_type");
+            var cardFaction = $("#search_card_faction");
+            table.reload('idTest',{
+                where:{
+                    cardCost:cardCost.val(),
+                    cardLevel:cardLevel.val(),
+                    cardType:cardType.val(),
+                    cardFaction:cardFaction.val()
+                }
+
+            });
+            layer.msg("查询成功", {time: 1000});
+        })
     });
+
+    // 删除选中的数据
+    $(function () {
+        $('#delAll').click(function () {
+            // 通过ajax删除数据,然后同步刷新页面
+            // jq ajax
+            $.ajax({
+                url: '${pageContext.request.contextPath}/cards?method=del',
+                type: 'post',
+                data: {'id[]': ids},
+                success: function (result) {
+                    // 无感刷新，体验超棒
+                    $("button.layui-laypage-btn").click();
+                    layer.msg("删除成功", {time: 1000});
+                },
+                error: function () {
+                    layer.msg("删除失败", {time: 1000});
+                }
+            });
+
+        });
+    });
+
+
 
 </script>
 
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/plugins/layer/layer.min.js"></script>
-<script src="js/content.min.js"></script>
-<script src="js/welcome.min.js"></script>
 
 
 </body>

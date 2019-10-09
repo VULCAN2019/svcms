@@ -88,6 +88,9 @@ public class CardServlet extends BaseServlet {
         // 那么这里就啥都没有，所以执行的条件查询就不会带条件去查询，
         // 所以查询到的结果将会为所有卡牌数据
         Map<String, String[]> parms = request.getParameterMap();
+        for (String s : parms.keySet()) {
+            System.out.println(s + ":" + parms.get(s)[0]);
+        }
 
         // 调用分页方法获取数据，这个数据里面放了一页里能存放的所有卡牌
         Page<Card> cardsPage = cardService.myFindPageCard(page, parms);
@@ -160,12 +163,11 @@ public class CardServlet extends BaseServlet {
      * @throws ServletException
      * @throws IOException
      */
-    public String doSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    public void doSelect(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
 
-        // 获取分页的参数(当前第几页)，因为没有设置过“p”的值，所以默认为0
-        String currentPage = request.getParameter("p");
-        // 正因为为0，所以这里半段是否为空是返回true的
+        // 获取分页的参数(当前第几页)，因为没有设置过“page”的值，所以默认为空
+        String currentPage = request.getParameter("page");
         if(StringUtils.isEmpty(currentPage)) {
             // 初始化当前页数为1
             currentPage = "1";
@@ -173,28 +175,27 @@ public class CardServlet extends BaseServlet {
         // 设置每页显示的条数
         // 创建一个分页对象    转换为数字对象类型  传入当前页数
         Page page = Page.of(Integer.valueOf(currentPage));
-
         // 获取查询的条件  若jsp那边没有form表单提交的查询条件，
         // 那么这里就啥都没有，所以执行的条件查询就不会带条件去查询，
         // 所以查询到的结果将会为所有卡牌数据
         Map<String, String[]> parms = request.getParameterMap();
-
+        for (String s : parms.keySet()) {
+            System.out.println(s + ":" + parms.get(s)[0]);
+        }
         // 调用分页方法获取数据，这个数据里面放了一页里能存放的所有卡牌
         Page<Card> cardsPage = cardService.myFindPageCard(page, parms);
-        // 把分页的信息发送到页面
-        request.setAttribute("page",cardsPage);
-
-
-
-        //// 获取查询的条件
-        //Map<String, String[]> params = request.getParameterMap();
-        //
-        //// 调用方法获取数据
-        //List<Card> cards = cardService.findPageCard(params);
-        //
-        ////  把查询到得信息发送到页面
-        //request.setAttribute("cards",cards);
-        return "card/index_v2";
+        // 这里LayuiData是封装过的json对象
+        LayuiData layuiData = new LayuiData();
+        layuiData.setCode(0);
+        layuiData.setCount(cardsPage.getTotalCount());
+        layuiData.setMsg("");
+        layuiData.setData(cardsPage.getPageData());
+        //// 把对象转成JSON
+        String jsonString = JSONObject.toJSONString(layuiData);
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter writer = response.getWriter();
+        writer.print(jsonString);
+        writer.close();
     }
 
     /**
@@ -301,10 +302,14 @@ public class CardServlet extends BaseServlet {
 
         // 获取参数
         String[] ids = request.getParameterValues("id[]");
+
+        System.out.println(ids);
         // 调用根据id删除数据的方法
         cardService.deleteByIds(ids);
 
         doAll(request, response);
+
+
 
     }
 
@@ -490,20 +495,6 @@ public class CardServlet extends BaseServlet {
         return "card/index_v6";
     }
 
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 七天免登录
-        HttpSession session = request.getSession();
-        // 判断session中是否有用户
-        if (session != null && session.getAttribute("username") != null) {
-            // 有用户就执行这里
-            response.sendRedirect(request.getContextPath()+"cards?method=toAll");
-        } else {
-            // 没有就执行这里
-            response.sendRedirect(request.getContextPath()+"cards/login.jsp");
-        }
-    }
 
 
 }
